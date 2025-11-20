@@ -1,20 +1,4 @@
--- Auto-generated from schema-views-mysql.psd1 (map@db2f8b8)
--- engine: mysql
--- table:  rate_limit_counters
--- Contract view for [rate_limit_counters]
-CREATE OR REPLACE ALGORITHM=MERGE SQL SECURITY INVOKER VIEW vw_rate_limit_counters AS
-SELECT
-  id,
-  subject_type,
-  subject_id,
-  name,
-  window_start,
-  window_size_sec,
-  `count`,
-  updated_at
-FROM rate_limit_counters;
-
--- Auto-generated from schema-views-mysql.psd1 (map@db2f8b8)
+-- Auto-generated from schema-views-mysql.psd1 (map@62c9c93)
 -- engine: mysql
 -- table:  rate_limit_counters_usage
 -- Rate limit counters per subject/name (last hour window)
@@ -30,4 +14,20 @@ FROM rate_limit_counters
 WHERE window_start > NOW() - INTERVAL 1 HOUR
 GROUP BY subject_type, subject_id, name
 ORDER BY total_count DESC;
+
+-- Auto-generated from schema-views-mysql.psd1 (map@62c9c93)
+-- engine: mysql
+-- table:  rate_limit_counters
+-- Contract view for [rate_limit_counters]
+CREATE OR REPLACE ALGORITHM=MERGE SQL SECURITY INVOKER VIEW vw_rate_limit_counters AS
+SELECT
+  id,
+  subject_type,
+  subject_id,
+  name,
+  window_start,
+  window_size_sec,
+  `count`,
+  updated_at
+FROM rate_limit_counters;
 
