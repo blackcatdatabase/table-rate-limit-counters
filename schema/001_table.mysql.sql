@@ -1,6 +1,7 @@
--- Auto-generated from schema-map-mysql.psd1 (map@62c9c93)
+-- Auto-generated from schema-map-mysql.psd1 (map@mtime:2025-11-27T15:13:14Z)
 -- engine: mysql
 -- table:  rate_limit_counters
+
 CREATE TABLE IF NOT EXISTS rate_limit_counters (
   id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   subject_type ENUM('ip','user','api_key','tenant') NOT NULL,

@@ -1,3 +1,0 @@
--- Auto-generated from schema-map-postgres.psd1 (map@62c9c93)
--- engine: postgres
--- table:  rate_limit_counters
