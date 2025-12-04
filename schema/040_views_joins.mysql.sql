@@ -1,4 +1,4 @@
--- Auto-generated from joins-mysql.yaml (map@94ebe6c)
+-- Auto-generated from joins-mysql.yaml (map@85230ed)
 -- engine: mysql
 -- view:   rate_limit_counters_hotspots
 
@@ -14,7 +14,7 @@ GROUP BY subject_type, subject_id, name
 HAVING SUM(`count`) > 0
 ORDER BY total_count DESC, subject_type, subject_id, name;
 
--- Auto-generated from joins-mysql.yaml (map@94ebe6c)
+-- Auto-generated from joins-mysql.yaml (map@85230ed)
 -- engine: mysql
 -- view:   rate_limit_usage
 
