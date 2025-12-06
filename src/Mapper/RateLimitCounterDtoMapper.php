@@ -17,7 +17,7 @@ use BlackCat\Database\Support\DtoHydrator;
 final class RateLimitCounterDtoMapper
 {
     /** @var array<string,string> Column -> DTO property */
-    private const COL_TO_PROP = [ 'subject_type' => 'subjectType', 'subject_id' => 'subjectId', 'window_start' => 'windowStart', 'window_size_sec' => 'windowSizeSec', 'updated_at' => 'updatedAt' ];
+    private const COL_TO_PROP = [ 'id' => 'id', 'subject_type' => 'subjectType', 'subject_id' => 'subjectId', 'name' => 'name', 'window_start' => 'windowStart', 'window_size_sec' => 'windowSizeSec', 'count' => 'count', 'updated_at' => 'updatedAt' ];
 
     /** @var string[] */
     private const BOOL_COLS   = [];
@@ -39,13 +39,8 @@ final class RateLimitCounterDtoMapper
 
     private static function tz(): DateTimeZone
     {
-        if (self::$tzObj instanceof DateTimeZone) {
-            return self::$tzObj;
-        }
-        try {
+        if (!(self::$tzObj instanceof DateTimeZone)) {
             self::$tzObj = new DateTimeZone(self::TZ);
-        } catch (\Throwable) {
-            self::$tzObj = new DateTimeZone('UTC');
         }
         return self::$tzObj;
     }
