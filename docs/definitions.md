@@ -5,14 +5,14 @@ Sliding-window counters for rate limiting enforcement.
 ## Columns
 | Column | Type | Null | Default | Description |
 | --- | --- | --- | --- | --- |
-| count | mysql: INT / postgres: INTEGER | NO | 0 | Number of hits recorded during the window. |
 | id | BIGINT | NO |  | Surrogate primary key. |
+| window_size_sec | mysql: INT / postgres: INTEGER | NO |  | Window length in seconds. |
+| count | mysql: INT / postgres: INTEGER | NO | 0 | Number of hits recorded during the window. |
+| subject_type | mysql: ENUM('ip','user','api_key','tenant') / postgres: TEXT | NO |  | Entity type being limited (ip,user,api_key,tenant). |
+| window_start | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO |  | Beginning of the measurement window. |
 | name | VARCHAR(120) | NO |  | Rate limiting bucket name. |
 | subject_id | VARCHAR(128) | NO |  | Identifier of the subject (stringified). |
-| subject_type | mysql: ENUM('ip','user','api_key','tenant') / postgres: TEXT | NO |  | Entity type being limited (ip,user,api_key,tenant). |
 | updated_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | Last update timestamp (UTC). |
-| window_size_sec | mysql: INT / postgres: INTEGER | NO |  | Window length in seconds. |
-| window_start | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO |  | Beginning of the measurement window. |
 
 ## Engine Details
 
