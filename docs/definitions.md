@@ -5,14 +5,14 @@ Sliding-window counters for rate limiting enforcement.
 ## Columns
 | Column | Type | Null | Default | Description |
 | --- | --- | --- | --- | --- |
-| count | INT | NO | 0 | Number of hits recorded during the window. |
 | id | BIGINT | NO |  | Surrogate primary key. |
-| name | VARCHAR(120) | NO |  | Rate limiting bucket name. |
+| subject_type | mysql: ENUM('ip','user','api_key','tenant') / postgres: TEXT | NO |  | Entity type being limited (ip,user,api_key,tenant). |
 | subject_id | VARCHAR(128) | NO |  | Identifier of the subject (stringified). |
-| subject_type | ENUM('ip','user','api_key','tenant') | NO |  | Entity type being limited (ip,user,api_key,tenant). |
-| updated_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) | Last update timestamp (UTC). |
-| window_size_sec | INT | NO |  | Window length in seconds. |
-| window_start | DATETIME(6) | NO |  | Beginning of the measurement window. |
+| name | VARCHAR(120) | NO |  | Rate limiting bucket name. |
+| window_start | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO |  | Beginning of the measurement window. |
+| window_size_sec | mysql: INT / postgres: INTEGER | NO |  | Window length in seconds. |
+| count | mysql: INT / postgres: INTEGER | NO | 0 | Number of hits recorded during the window. |
+| updated_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | Last update timestamp (UTC). |
 
 ## Engine Details
 
@@ -49,9 +49,9 @@ Indexes:
 ## Views
 | View | Engine | Flags | File |
 | --- | --- | --- | --- |
-| vw_rate_limit_counters | mysql | algorithm=MERGE, security=INVOKER | [schema\040_views.mysql.sql](schema\040_views.mysql.sql) |
-| vw_rate_limit_counters_hotspots | mysql | algorithm=TEMPTABLE, security=INVOKER | [schema\040_views_joins.mysql.sql](schema\040_views_joins.mysql.sql) |
-| vw_rate_limit_usage | mysql | algorithm=TEMPTABLE, security=INVOKER | [schema\040_views_joins.mysql.sql](schema\040_views_joins.mysql.sql) |
-| vw_rate_limit_counters | postgres |  | [schema\040_views.postgres.sql](schema\040_views.postgres.sql) |
-| vw_rate_limit_counters_hotspots | postgres |  | [schema\040_views_joins.postgres.sql](schema\040_views_joins.postgres.sql) |
-| vw_rate_limit_usage | postgres |  | [schema\040_views_joins.postgres.sql](schema\040_views_joins.postgres.sql) |
+| vw_rate_limit_counters | mysql | algorithm=MERGE, security=INVOKER | [../schema/040_views.mysql.sql](../schema/040_views.mysql.sql) |
+| vw_rate_limit_counters_hotspots | mysql | algorithm=TEMPTABLE, security=INVOKER | [../schema/040_views_joins.mysql.sql](../schema/040_views_joins.mysql.sql) |
+| vw_rate_limit_usage | mysql | algorithm=TEMPTABLE, security=INVOKER | [../schema/040_views_joins.mysql.sql](../schema/040_views_joins.mysql.sql) |
+| vw_rate_limit_counters | postgres |  | [../schema/040_views.postgres.sql](../schema/040_views.postgres.sql) |
+| vw_rate_limit_counters_hotspots | postgres |  | [../schema/040_views_joins.postgres.sql](../schema/040_views_joins.postgres.sql) |
+| vw_rate_limit_usage | postgres |  | [../schema/040_views_joins.postgres.sql](../schema/040_views_joins.postgres.sql) |
