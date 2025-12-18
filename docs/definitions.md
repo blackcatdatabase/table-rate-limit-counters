@@ -3,16 +3,17 @@
 Sliding-window counters for rate limiting enforcement.
 
 ## Columns
-| Column | Type | Null | Default | Description |
-| --- | --- | --- | --- | --- |
-| id | BIGINT | NO |  | Surrogate primary key. |
-| subject_type | mysql: ENUM('ip','user','api_key','tenant') / postgres: TEXT | NO |  | Entity type being limited (ip,user,api_key,tenant). |
-| subject_id | VARCHAR(128) | NO |  | Identifier of the subject (stringified). |
-| name | VARCHAR(120) | NO |  | Rate limiting bucket name. |
-| window_start | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO |  | Beginning of the measurement window. |
-| window_size_sec | mysql: INT / postgres: INTEGER | NO |  | Window length in seconds. |
-| count | mysql: INT / postgres: INTEGER | NO | 0 | Number of hits recorded during the window. |
-| updated_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | Last update timestamp (UTC). |
+| Column | Type | Null | Default | Description | Crypto |
+| --- | --- | --- | --- | --- | --- |
+| id | BIGINT | NO |  | Surrogate primary key. |  |
+| subject_type | mysql: ENUM('ip','user','api_key','tenant') / postgres: TEXT | NO |  | Entity type being limited (ip,user,api_key,tenant). |  |
+| subject_id | mysql: VARCHAR(128) | NO |  | Identifier of the subject (stringified). |  |
+| name | mysql: VARCHAR(120) | NO |  | Rate limiting bucket name. |  |
+| window_start | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO |  | Beginning of the measurement window. |  |
+| window_size_sec | mysql: INT / postgres: INTEGER | NO |  | Window length in seconds. |  |
+| count | mysql: INT / postgres: INTEGER | NO | 0 | Number of hits recorded during the window. |  |
+| updated_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | Last update timestamp (UTC). |  |
+| version |  | YES |  | Optimistic locking version counter. |  |
 
 ## Engine Details
 
